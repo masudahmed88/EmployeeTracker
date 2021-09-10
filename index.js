@@ -47,11 +47,11 @@ async function loadMainPrompts() {
           name: "Update Employee Role",
           value: "UPDATE_EMPLOYEE_ROLE"
         },
-        // Bonus
-        // {
-        //   name: "Update Employee Manager",
-        //   value: "UPDATE_EMPLOYEE_MANAGER"
-        // },
+       
+        {
+          name: "Update Employee Manager",
+          value: "UPDATE_EMPLOYEE_MANAGER"
+        },
         {
           name: "View All Roles",
           value: "VIEW_ROLES"
@@ -113,6 +113,7 @@ async function viewEmployees() {
   const employees = await db.findAllEmployees();
 
   console.log("\n");
+  console.log(employees)
   console.table(employees);
 
   loadMainPrompts();
@@ -125,7 +126,8 @@ async function viewEmployeesByDepartment() {
     // CREATE TWO PROPERTIES name AND value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE NAME OF THE DEPARTMENT.
     // THE PROPERTY value SHOULD CONTAIN id.
     // TODO: YOUR CODE HERE
-
+    name: name,
+    value: id
   }));
 
   const { departmentId } = await prompt([
@@ -153,7 +155,8 @@ async function updateEmployeeRole() {
     // THE PROPERTY value SHOULD CONTAIN id.
     // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
     // TODO: YOUR CODE HERE
-
+    name: `${first_name} ${last_name}`,
+    value: id
   }));
 
   const { employeeId } = await prompt([
@@ -286,7 +289,9 @@ async function addEmployee() {
     // CREATE TWO PROPERTIES name AMD value FOR THIS OBJECT. THE PROPERTY name SHOULD CONTAIN THE CONCATENATION OF THE FIRST HAME AND THE LAST NAME.
     // THE PROPERTY value SHOULD CONTAIN id.
     // THIS OBJECT FOR EACH MANAGER WILL RETURN TO MAP() TO CONSTRUCT AN ARRAY TO BE RETURNED AND BE STORED TO managerChoices.
-    // TODO: YOUR CODE HERE
+    // TODO: YOUR CODE HERE,
+    name: `${first_name} ${last_name}`,
+    value: id
 
   }));
   managerChoices.unshift({ name: "None", value: null });
